@@ -1,6 +1,7 @@
 Detect A loop in  A linked list
 In this method we have to tranverse the list using two pointer one can be slow pointer and one can be fast pointer.
 I have used this method even to find the middle element in a linked list
+2)To detect and delete the loop from a linked list.
 T.C o(n)
 S.C o(1)
 class cycle
