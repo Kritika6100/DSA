@@ -1,0 +1,69 @@
+before you go to master tree must clear with recursion concept
+Every Tree has a data so--- int data;
+Ek node ko bus ek ka nahi variable number of node store kar saku--ArrayList Or LinkedList .
+We are going to use ArrayList 
+ArrayList mi children store kar saku that is tree node and tree node ka jo data h woh integer h
+
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Tree {
+    public static void main(String args[])
+    {
+       TreeNode<Integer> root=takeInput();
+       print(root);
+//        TreeNode<Integer> node1=new TreeNode<Integer>(2);
+//        TreeNode<Integer> node2=new TreeNode<Integer>(3);
+//        TreeNode<Integer> node3=new TreeNode<Integer>(5);
+//        TreeNode<Integer> node4=new TreeNode<Integer>(6);
+//        root.children.add(node1);
+//        root.children.add(node2);
+//        root.children.add(node3);
+//        node2.children.add(node4);
+//        System.out.println(root);
+
+    }
+
+    private static TreeNode<Integer> takeInput() {
+        int n;
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the next node data");
+        n=sc.nextInt();
+        TreeNode<Integer> root=new TreeNode<>(n);
+        System.out.println("enter the child count");
+        int childcount=sc.nextInt();
+        for(int i=0;i<childcount;i++) {
+            TreeNode<Integer> child = takeInput();
+            root.children.add(child);
+        }
+
+
+        return root;
+    }
+    public static void print(TreeNode<Integer> root) {
+        String s = root.data + ":";
+        for (int i = 0; i < root.children.size(); i++) {
+         s=s+root.children.get(i).data+",";
+        }
+        System.out.println(s);
+        for(int i=0;i<root.children.size();i++)
+        {
+            print(root.children.get(i));
+        }
+    }
+
+    public static class TreeNode<T>
+    {
+        public T data;
+        public ArrayList<TreeNode<T>> children;
+        public TreeNode(T data)
+        {
+            this.data=data;
+            children=new ArrayList<>();
+        }
+
+
+    }
+}
