@@ -1,0 +1,11 @@
+Prerequisite to use Sliding window technique
+
+The use of Sliding Window technique can be done in a very specific scenario, where the size of window for computation is fixed throughout the complete nested loop. Only then the time complexity can be reduced. 
+
+How to use Sliding Window Technique?
+
+The general use of Sliding window technique can be demonstrated as following:
+
+Find the size of window required 
+Compute the result for 1st window, i.e. from start of data structure
+Then use a loop to slide the window by 1, and keep computing the result window by window.
