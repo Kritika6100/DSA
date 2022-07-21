@@ -1,0 +1,57 @@
+Given an array containing N integers and an integer K.,
+Your task is to find the length of the longest Sub-Array with the sum of the elements equal to the given value K.
+Input :
+A[] = {10, 5, 2, 7, 1, 9}
+K = 15
+Output : 4
+Explanation:
+The sub-array is {5, 2, 7, 1}.
+1<=N<=105
+-105<=A[i], K<=105
+//////////////////////////////////////////////////////////////////
+
+
+
+
+class Solution{
+    
+   
+    // Function for finding maximum and value pair
+    public static int lenOfLongSubarr (int A[], int N, int K) {
+        //Complete the function
+      HashMap<Integer,Integer> map=new HashMap<>();
+      map.put(0,-1);
+      int sum=0;
+      int max=0;
+      int len=0;
+      for(int i=0;i<N;i++)
+      {
+          sum+=A[i];
+          if(map.containsKey(sum-K))
+          {
+              len=i-map.get(sum-K);
+              if(len>max)
+              {
+                  max=len;
+              }
+          }
+          if(!map.containsKey(sum)) 
+          {
+             map.put(sum,i); 
+          }
+      }
+      return max;
+    }
+    
+    
+  //Pattern 2
+  1)this ques was similar to the subaary with given sum but that appoarch was applicable to the postive elements only
+  2)In sach question where we have to find the longest/largest subarray we should think of hashmap
+  3)Step 1
+    Calculate the prefix sum 
+    Step 2
+    see whether the map contains(sum-k)
+    if it contains that then calculate the max len by calculating len=i-map.get(sum-k)
+    Step 3
+    then see if map dont contains sum
+    then store in map (sum,i)
