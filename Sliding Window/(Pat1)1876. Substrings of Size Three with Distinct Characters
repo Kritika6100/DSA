@@ -1,0 +1,45 @@
+Input: s = "aababcabc"
+Output: 4
+Explanation: There are 7 substrings of size 3: "aab", "aba", "bab", "abc", "bca", "cab", and "abc".
+The good substrings are "abc", "bca", "cab", and "abc".
+
+class Solution {
+    public int countGoodSubstrings(String s) {
+       HashMap<Character,Integer> map=new HashMap<>();
+        int l=s.length();
+        if(l<3)
+        {
+            return 0;
+        }
+        int k=3;
+        int ans=0;
+        
+        for(int i=0;i<k-1;i++)
+        {
+            char ch=s.charAt(i);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        }
+        for(int i=k-1,j=0;i<l;)
+        {
+            char ch=s.charAt(i);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+            int size=map.size();
+            if(size==k)
+            {
+                ans++;
+            }
+            int freq=map.get(s.charAt(j));
+            if(freq==1)
+            {
+                map.remove(s.charAt(j));
+            }
+            else 
+            {
+                map.put(s.charAt(j),freq-1);
+            }
+            i++;
+            j++;
+        }
+        return ans;
+    }
+}
