@@ -1,0 +1,58 @@
+N = 7, K = 4
+A[] = {1,2,1,3,4,2,3}
+Output: 3 4 4 3
+Explanation: Window 1 of size k = 4 is
+1 2 1 3. Number of distinct elements in
+this window are 3. 
+Window 2 of size k = 4 is 2 1 3 4. Number
+of distinct elements in this window are 4.
+Window 3 of size k = 4 is 1 3 4 2. Number
+of distinct elements in this window are 4.
+Window 4 of size k = 4 is 3 4 2 3. Number
+of distinct elements in this window are 3.
+
+
+class Solution
+{
+    ArrayList<Integer> countDistinct(int A[], int n, int k)
+    {
+        // code here 
+        //acquire and realise
+        //Hashing
+        //Sliding Window
+        HashMap<Integer,Integer> map=new HashMap<>();
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int i=0;i<k-1;i++)
+        {
+            map.put(A[i],map.getOrDefault(A[i],0)+1);
+        }
+        for(int j=0,i=k-1;i<n;)
+        { 
+            
+             
+            map.put(A[i],map.getOrDefault(A[i],0)+1);//acquire
+            list.add(map.size());
+           //realise
+            int freq=map.get(A[j]);
+            if(freq==1)
+            {
+                map.remove(A[j]);
+            }
+            else
+            {
+                map.put(A[j],freq-1);
+            }
+            i++;
+            j++;
+
+        }
+        return list;
+        
+    }
+}
+Pattern 1
+Hashing Counting Sliding Window
+1)Store the elements till (windowsize-1)//store in map
+2)Accquire the windowsize-1 element and then add it to the map
+3)work-- we have to calculate the number of distinct elements in window size--addd map.size in list
+4) release the first element by decreasing it freq ie check its freq is 1 then remove or decrease it by 1
