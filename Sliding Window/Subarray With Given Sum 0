@@ -1,0 +1,29 @@
+class Solution{
+    //Function to check whether there is a subarray present with 0-sum or not.
+    static boolean findsum(int arr[],int n)
+    {
+        //Your code here
+      //Dekho constant space bhi use hua h toh hashmap hashset use hoga
+      HashMap<Integer,Integer> map=new HashMap<>();
+      map.put(0,0);
+      boolean res=false;
+      int currsum=0;
+      for(int i=0;i<n;i++)
+      {
+          currsum+=arr[i];
+          if(map.containsKey(currsum-0))
+          {
+              res=true;
+              break;
+          }
+          else
+          map.put(currsum,i);
+      }
+      return res;
+    }
+}
+//PTR
+1)It is solved using hashmap intially putting (0,0) in hash map so if we encounter any sum=0; we will return true;
+if we have to return max len
+we would have calculate the len=i-map.get(sum)
+and compare it with maxlen
