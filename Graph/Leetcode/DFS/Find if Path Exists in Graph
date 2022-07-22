@@ -57,3 +57,35 @@ class Solution {
         return false;
 }
 }
+
+//////////////////////////////////
+lass Solution
+{
+    public int possible_paths(int[][] edges, int n, int s, int d)
+    {
+        // Code here 
+        ArrayList<ArrayList<Integer>> adjList = new ArrayList<ArrayList<Integer>>(n);
+        for(int i=0; i<n; i++){
+            adjList.add(new ArrayList<Integer>());
+        }
+        for(int i=0; i<edges.length; ++i){
+            adjList.get(edges[i][0]).add(edges[i][1]);
+        }
+        // can do both dfs and bfs
+        // I will go with dfs
+        // no need of vis as it is DAG
+        int[] nWays = {0};
+        dfs(s,-1,d,nWays,adjList);
+        return nWays[0];
+    }
+    public void dfs(int source,int parent,int destination, int[] nWays,  ArrayList<ArrayList<Integer>> adjList){
+        //vis[source] = 1;
+        if(source == destination){
+            nWays[0] += 1;
+            return;
+        }
+        for(Integer v:adjList.get(source)){
+            dfs(v,source,destination,nWays,adjList);
+        }
+    }
+}
