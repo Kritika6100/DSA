@@ -1,1 +1,39 @@
+Given an array A[] of N integers and a range(L, R). The task is to find the number of subarrays having sum in the range L to R (inclusive).
+Input:
+N = 3, L = 3, R = 8
+A[] = {1, 4, 6}
+Output: 
+3
+Explanation: 
+The subarrays are [1,4], [4] and [6]
+Example 2:
 
+Input:
+N = 4, L = 4, R = 13
+A[] = {2, 3, 5, 8}
+Output: 
+6
+Explanation: 
+The subarrays are [2,3], [2,3,5], 
+[3,5],[5], [5,8] and [8]
+
+
+
+class Solution { 
+   long countSubarray(int N,int A[],long L,long R) {
+       return count(A, R) - count(A, L-1);
+   }
+   
+   // number of subarrays with sum <= limit
+   private long count(int[] A, long limit){
+       int i = 0, j = 0;
+       long sum = 0, ans = 0;
+       while(j < A.length){
+           sum += A[j];
+           while(sum > limit) sum -= A[i++];
+           ans += j - i + 1;
+           j++;
+       }
+       return ans;
+   }
+}
