@@ -1,1 +1,78 @@
+Given a word pat and a text txt. Return the count of the occurences of anagrams of the word in the text.
 
+Example 1:
+
+Input:
+txt = forxxorfxdofr
+pat = for
+Output: 3
+Explanation: for, orf and ofr appears
+in the txt, hence answer is 3.
+
+
+class Solution {
+
+    int search(String pat, String txt) {
+        // code here
+        //acquire work realise
+        int n=pat.length();
+        HashMap<Character,Integer> map=new HashMap<>();
+        for(int i=0;i<n;i++)
+        {
+            char ch=pat.charAt(i);
+            map.put(ch,map.getOrDefault(pat.charAt(i),0)+1);
+        }
+        int window_size=pat.length();
+        int i=0;
+       int j=0;
+       int ans=0;
+       int count=map.size();//distinct number 
+       while(j<txt.length())
+       {
+           char ch=txt.charAt(j);
+           if(map.containsKey(ch))
+           {
+               map.put(ch,map.get(ch)-1);
+           
+           if(map.get(ch)==0)
+           {
+               count--;
+           }
+           }
+           //we have a anangram
+           if(j-i+1<window_size)
+           {
+               j++;
+           }
+           else if(j-i+1==window_size){
+           if(count==0)
+           {
+               ans++;
+           }
+           
+           char ch2=txt.charAt(i);
+           if(map.containsKey(ch2))
+           {
+               map.put(ch2,map.get(ch2)+1);
+               if(map.get(ch2)==1)
+               {
+                   count++;
+               }
+           }
+           i++;
+           j++;
+           }
+          
+           
+       }
+       return ans;
+    }
+}
+
+Pattern 3
+//In this pattern we have been given the window size indirectly
+such as the pat.length() is the window size for us
+// and we store it in hashmap to have its freq
+//and you see we have to have two cases one is j-i+1 ==k that means you reached that window
+//and one is j-i+1<k .>>>> k++
+//we have to refill the hashmap 
