@@ -1,0 +1,85 @@
+//Directed ACyclic Graph 
+//Topological Sorting of DAG is a linear ordering of vertices such that for every directed edge from vertex ‘u’ to vertex ‘v’, vertex ‘u’ comes
+   before ‘v’ in the ordering.
+Topological Sorting for a graph is not possible if the graph is not a DAG.
+t c O(V+E)
+s c O(N)
+
+
+import java.util.*;
+
+public class Solution 
+{
+    public static ArrayList<Integer> topologicalSort(ArrayList<ArrayList<Integer>> edges, int v, int e) 
+    {
+        // Write your code here
+          //edge de hugi 
+        //Step 1 Adjaceny list bana lo
+       
+        //DFS
+        //Stack
+        Stack<Integer> s=new Stack<>();
+        boolean visited[]=new boolean[v];
+        ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
+        for(int i = 0; i < v; i++) 
+        {
+            ans.add(new ArrayList<Integer>());
+        }
+        for(int i=0;i<e;i++)
+        {
+            int u=edges.get(i).get(0);
+            int v1=edges.get(i).get(1);
+            ans.get(u).add(v1);
+        }
+        //call dfs topological function for all componets
+        for(int i=0;i<v;i++)
+        {
+            if(visited[i]==false)
+            {
+                dfstopsort(ans,visited,i,s);
+            }
+        }
+        ArrayList<Integer> fans=new ArrayList<>();
+        while(!s.isEmpty())
+        {
+            fans.add(s.peek());
+            s.pop();
+        }
+        return fans;
+    }
+    public static void dfstopsort( ArrayList<ArrayList<Integer>> ans,boolean visited[],int node, Stack<Integer> s)
+    {
+        visited[node]=true;
+        for(Integer it:ans.get(node))
+        {
+            if(visited[it]==false)
+            {
+                dfstopsort(ans,visited,it,s);
+            }
+        }
+        s.push(node);
+    }
+}
+ Pattern for topologicol sort in dfs   
+ //If edges are given then make adajency list
+ how to make a adajceny list
+ we have to 
+  for(int i = 0; i < v; i++) 
+        {
+            ans.add(new ArrayList<Integer>());
+        }
+        for(int i=0;i<e;i++)
+        {
+            int u=edges.get(i).get(0);
+            int v1=edges.get(i).get(1);
+            ans.get(u).add(v1);
+        }
+        do this steps 
+        
+        
+        Then we have to have a tack because it would give us the linear ordering of the vertices and edges u v
+        then we make dfs call as usual one and put the node in then stack
+        
+            
+
+
