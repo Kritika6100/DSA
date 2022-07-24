@@ -5,3 +5,68 @@ Explanation: According to the given edges, all
 nodes can be reaced from nodes from 0, 1 and 2. 
 But, since 0 is minimum among 0,1 and 3, so 0 
 is the output.
+
+////////////////////////////////////////////
+
+class Solution
+{
+    //Function to find a Mother Vertex in the Graph.
+    public int findMotherVertex(int V, ArrayList<ArrayList<Integer>>adj)
+    {
+      boolean visited[]=new boolean[V];
+      int v=-1;
+      for(int i=0;i<V;i++)
+      {
+          if(visited[i]==false)
+          {
+              dfs(adj,visited,i);
+              v=i;
+          }
+      }
+      Arrays.fill(visited,false);
+      for(int i=v;i<V;i++)
+      {
+          if(visited[i]==false)
+          dfs(adj,visited,i);
+      }
+      for(boolean check:visited)
+      {
+          if(check==false)
+          {
+              return -1;
+          }
+      }
+      return v;
+    }
+      
+      public static void dfs(ArrayList<ArrayList<Integer>>adj,boolean visited[],int node)
+      {
+          visited[node]=true;
+          for(Integer it:adj.get(node))
+          {
+              if(visited[it]==false)
+              dfs(adj,visited,it);
+          }
+      }
+        
+    }
+
+Algorithm : 
+
+Do DFS traversal of the given graph. While doing traversal keep track of last finished vertex ‘v’. This step takes O(V+E) time.
+If there exist mother vertex (or vertices), then v must be one (or one of them). Check if v is a mother vertex by doing DFS/BFS from v.
+This step also takes O(V+E) time.
+
+    // If there exist mother vertex (or vertices)
+    // in given graph, then v must be one
+    // (or one of them)
+   
+    // Now check if v is actually a mother
+    // vertex (or graph has a mother vertex).
+    // We basically check if every vertex
+    // is reachable from v or not.
+   
+    // Reset all values in visited[] as false
+    // and do DFS beginning from v to check
+    // if all vertices are reachable from
+    // it or not.
