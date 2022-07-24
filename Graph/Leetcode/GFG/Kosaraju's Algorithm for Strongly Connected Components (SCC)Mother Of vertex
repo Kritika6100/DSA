@@ -1,1 +1,66 @@
 Kosaraju's Algorithm for Strongly Connected Components (SCC)
+We can find all strongly connected components in O(V+E) time using Kosaraju’s algorithm. Following is detailed Kosaraju’s algorithm.
+
+Create an empty stack ‘S’ and do DFS traversal of a graph. In DFS traversal, after calling recursive DFS for adjacent vertices of a vertex, push the vertex to stack.
+In the above graph, if we start DFS from vertex 0, we get vertices in stack as 1, 2, 4, 3, 0. 
+Reverse directions of all arcs to obtain the transpose graph. 
+One by one pop a vertex from S while S is not empty. Let the popped vertex be ‘v’. Take v as source and do DFS (call DFSUtil(v)). 
+The DFS starting from v prints strongly connected component of v. In the above example, we process vertices in order 0, 3, 4, 2, 1 (One by one popped from stack). 
+
+
+
+public int kosaraju(int V, ArrayList<ArrayList<Integer>> adj)
+   {
+       //code here
+       //Topological Sort
+       Stack<Integer> stack = new Stack<>();
+       boolean[] visited = new boolean[V];
+       for(int i=0;i<V;i++){
+           if(!visited[i]){
+               dfs(i,visited,stack,adj);
+           }
+       }
+       
+       //transpose of adjcantcy list
+       ArrayList<ArrayList<Integer>> transpose = new ArrayList<ArrayList<Integer>>();
+       for(int i=0;i<V;i++){
+           transpose.add(new ArrayList<Integer>());
+       }
+       
+       for(int i=0;i<V;i++){
+           for(int it:adj.get(i)){
+               transpose.get(it).add(i);
+           }
+       }
+       
+       // count the strongly connected components
+       Arrays.fill(visited,false);
+       int count =0;
+       while(!stack.isEmpty()){
+           int node = stack.pop();
+           if(!visited[node]){
+               count++;
+               revdfs(node,transpose,visited);
+           }
+       }
+       return count;
+   }
+   
+   public void revdfs(int node, ArrayList<ArrayList<Integer>> transpose,boolean[] visited){
+       visited[node]= true;
+       for(int it: transpose.get(node)){
+           if(!visited[it]){
+               revdfs(it,transpose,visited);
+           }
+       }
+   }
+   
+   public void dfs(int node,boolean[] visited, Stack<Integer> stack, ArrayList<ArrayList<Integer>> adj){
+       visited[node] = true;
+       for(int it: adj.get(node)){
+           if(!visited[it]){
+               dfs(it,visited,stack,adj);
+           }
+       }
+       stack.push(node);
+   }
