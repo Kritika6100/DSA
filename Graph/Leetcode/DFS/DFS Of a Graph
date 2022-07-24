@@ -27,3 +27,59 @@ class Solution {
         }
     }
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+import java.util.*;
+
+public class Solution {
+    public static ArrayList<ArrayList<Integer>> depthFirstSearch(int v, int e, ArrayList<ArrayList<Integer>> edges) {
+        // Write your code here.
+        //Step 1 edge de hui h make adjaceny list
+          ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
+          ArrayList<ArrayList<Integer>> ans1=new ArrayList<>();
+      
+        for(int i=0;i<v;i++)
+        {
+            adj.add(new ArrayList<>());
+        }
+        for(int i=0;i<e;i++)
+        {
+            int u=edges.get(i).get(0);
+            int v1=edges.get(i).get(1);
+            adj.get(u).add(v1);
+            adj.get(v1).add(u);
+        }
+      
+        //make boolean visited array
+        
+        boolean visited[]=new boolean[v];
+        for(int i=0;i<v;i++)
+        {
+             
+            if(visited[i]==false)
+            {
+                 ArrayList<Integer> ans=new ArrayList<>();
+                dfs(i,visited,ans,adj);
+                ans1.add(ans);
+            }
+        }
+        return ans1;
+    }
+
+        public static void dfs(int node,boolean visited[],ArrayList<Integer> ans ,ArrayList<ArrayList<Integer>> adj)
+        {
+             ans.add(node);
+            visited[node]=true;
+        
+            for(Integer it:adj.get(node))
+            {
+                if(visited[it]==false)
+                {
+                    dfs(it,visited,ans,adj);
+                }
+            }
+            
+        }
+        
+    }
