@@ -1,0 +1,23 @@
+the graph can have bellman ford algorithms --->negative weights
+Directed graph with weight dijkastra algorithm(greedy) can be used but when there are neagtive weight use this
+Problem Statement
+You have been given a directed weighted graph of ‘N’ vertices labeled from 1 to 'N' and ‘M’ edges. Each edge connecting two nodes 'u' and 'v' has a weight 'w' denoting the distance between them.
+Your task is to find the length of the shortest path between the ‘src’ and ‘dest’ vertex given to you in the graph. The graph may contain negatively weighted edges.
+Example :
+
+3 3 1 3
+1 2 2
+1 3 2
+2 3 -1
+In the above graph, the length of the shortest path between vertex 1 and vertex 3 is 1->2->3 with a cost of 2 - 1 = 1.
+Note :
+It's guaranteed that the graph doesn't contain self-loops and multiple edges. Also the graph does not contain negative weight cycles.
+Input Format :
+1    
+4 4 1 4
+1 2 4
+1 3 3
+2 4 7 
+3 4 -2
+Sample Output 1 :
+1
