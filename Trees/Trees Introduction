@@ -67,3 +67,33 @@ public class Tree {
 
     }
 }
+Tree is a type of a non-linear Data Structure. In this a single node can be connected to multiple nodes..
+
+This hierarchical structure of tree is used in Computer Science as an abstract data type for various applications like data storage, search & sort algorithms.
+
+
+Basic Term's :-
+
+1. Node
+2. Root
+3. Children
+4. Parent
+5. Siblings
+6. Ancestor
+7. Descendant
+8. Leaf
+Node :- which hold's data eg:- (1)
+
+Root :- Where tree start OR top node
+
+Children :- it is a node of a parent node. E.g :- (2) is a child of node (1)
+
+Parent :- E.g (1) is parent of node (2) & node (3)
+
+Siblings :- whose parent is same. E.g (4) & (5) are sibling's because there parent is same i.e. (2)
+
+Ancestor :- Going up from a child or leaf
+
+Descendant :- Going down from top root
+
+Leaf :- is that who don't have any child's E.g (4) & (5) & (6) & (7) are leaf node
