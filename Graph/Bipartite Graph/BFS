@@ -1,0 +1,46 @@
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        //bipartite graph are the graph such that can be colored using 2 colors such that
+        //no two adjacent nodes have same color
+        Queue<Integer> q=new LinkedList<>();
+        int colors[]=new int[graph.length];
+        for(int i=0;i<colors.length;i++)
+        {
+            colors[i]=-1;
+        }
+        for(int i=0;i<colors.length;i++)
+        {
+            if(colors[i]==-1)
+            {
+                if(!bfs(graph,colors,i))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public static boolean bfs(int [][]graph,int colors[],int node)
+    {
+           Queue<Integer> q=new LinkedList<>();
+        q.add(node);
+        colors[node]=1;
+        while(!q.isEmpty())
+        {
+            Integer checkit=q.poll();
+            for(Integer it:graph[checkit])
+            {
+                if(colors[it]==-1)
+                {
+                    colors[it]=1-colors[checkit];
+                    q.add(it);
+                }
+                else if(colors[it]==colors[checkit])
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
