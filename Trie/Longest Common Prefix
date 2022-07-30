@@ -1,0 +1,36 @@
+// code here
+        //This is a question of trie
+        //Appoarch Take the first string take it characters one by one and compare with remaing strings
+        //Either the character will be macthing or not matching
+        //if matching add it to the array and if not stop it
+        StringBuilder str=new StringBuilder();
+        for(int i=0;i<arr[0].length();i++)
+        {
+            char ch=arr[0].charAt(i);
+            boolean match =true;
+            //for comparing character with rest of the strings
+            for(int j=1;j<arr.length;j++)
+            {
+              //not match
+              if(arr[j].length()<i || ch!=arr[j].charAt(i))
+              {
+                  match=false;
+                  break;
+              }
+              
+            }
+            if(match==false)
+            {
+                break;
+            }
+            else
+            {
+                str.append(ch);
+            }
+        }
+        return str.toString();
+        
+    }
+}
+//T.C O(MN)
+//SC  O(1)
