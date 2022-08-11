@@ -1,0 +1,45 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+      //INORDER OF THE BST IS ALWAYS A SORTED MANNER 
+      ArrayList<Integer> list=new ArrayList<>();
+        helper(list,root);
+        //toh abb mere pass list hai mujhe usko reverse karna h
+        //This method assumes that there are no duplicate values in the tree
+        ArrayList<Integer> reverselist=new ArrayList<>(list);
+        Collections.sort(reverselist);
+        if(reverselist.equals(list))
+        {
+            return true;
+        }
+        System.out.println(list);
+        System.out.println(reverselist);
+        return false;
+    }
+    public static void helper(ArrayList<Integer> list,TreeNode root)
+    {
+        //inorder
+        //base condition
+        if(root==null)
+        {
+            return;
+        }
+        helper(list,root.left);
+        list.add(root.val);
+        helper(list,root.right);
+    }
+}
