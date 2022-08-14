@@ -1,0 +1,91 @@
+Appooarch 1
+I have store all the nodes in the list and then i have done a linear search to find the x
+class Solution
+{
+    // returns the inorder successor of the Node x in BST (rooted at 'root')
+	public Node inorderSuccessor(Node root,Node x)
+         {
+          //add code here.
+          ArrayList<Node> list=new ArrayList<>();
+          helper(list,root);
+          int ans=0;
+          
+          if(x==list.get(list.size()-1))
+          {
+              return null;
+          }
+          for(int i=0;i<list.size();i++)
+          {
+              if(list.get(i)==x)
+               return list.get(i+1);
+                  
+          }
+          return null;
+          
+         }
+         public static void helper(ArrayList<Node> list,Node root)
+         {
+             if(root==null)
+             {
+                 return;
+             }
+             helper(list,root.left);
+             list.add(root);
+             helper(list,root.right);
+      }
+}
+
+
+
+
+Appoarch 2 (error aarhi h isme)
+  Node ans=new Node(Integer.MAX_VALUE);
+          helper(root,x.data,ans);
+          if(ans.data==Integer.MAX_VALUE)
+          {
+              return null;
+          }
+          return ans;
+         }
+         public static void helper(Node root,int x,Node ans)
+         {
+             if(root==null)
+             {
+                 return ;
+             }
+             helper(root.left,x,ans);
+             if(root.data>x)
+             {
+                 if(root.data<ans.data)
+                 {
+                     ans=root;
+                 }
+             }
+             helper(root.right,x,ans);
+         }
+}
+//appoarch 3
+class Solution
+{
+    // returns the inorder successor of the Node x in BST (rooted at 'root')
+	public Node inorderSuccessor(Node root,Node x)
+         {
+          //add code here.
+        Node successor=null;
+        while(root!=null)
+        {
+            if(root.data<=x.data)
+            {
+                root=root.right;
+            }
+            else
+            {
+                successor=root;
+                root=root.left;
+            }
+        }
+        return successor;
+         }
+}
+T.C O(H)
+S.C O(1)
