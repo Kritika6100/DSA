@@ -1,0 +1,48 @@
+class Solution {
+    public int longestkSubstr(String s, int k) {
+        // code here
+        //this question can be done using sliding window concept
+        if(s==null ||s.length()==0)
+        {
+            return 0;
+        }
+        //to store distinct characters in the window
+        HashSet<Integer> set=new HashSet<>();
+        HashMap<Character,Integer> map=new HashMap<>();
+        int max=-1;
+        int j=0;
+        int i=0;
+       while(j<s.length())
+       {
+           map.put(s.charAt(j),map.getOrDefault(s.charAt(j),0)+1);
+           if(map.size()<k)
+           {
+               j++;
+           }
+           else if(map.size()==k)
+           {
+               max=Math.max(j-i+1,max);
+               j++;
+           }
+           else if(map.size()>k)
+           {
+               while(map.size()>k)
+               {
+                   int freq=map.get(s.charAt(i));
+                   if(map.get(s.charAt(i))==1)
+                   {
+                       map.remove(s.charAt(i));
+                   }
+                   else
+                   {
+                       map.put(s.charAt(i),freq-1);
+                   }
+                   i++;
+               }
+           j++;
+           }
+         
+       }
+         return max;
+    }
+}
