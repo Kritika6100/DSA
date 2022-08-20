@@ -1,0 +1,40 @@
+class Solution{
+    static int longestSubstrDistinctChars(String S){
+        // code here
+        int l=S.length();
+        HashMap<Character,Integer>map=new HashMap<>();
+        int i=0;
+        int j=0;
+        int max=-1;
+        while(j<l)
+        {
+            map.put(S.charAt(j),map.getOrDefault(S.charAt(j),0)+1);
+           
+             if(map.size()==j-i+1)
+            {
+                max=Math.max(max,j-i+1);
+                j++;
+            }
+            else if( map.size()<j-i+1)
+            {
+                while(map.size()<j-i+1)
+                {
+                    int freq=map.get(S.charAt(i));
+                    if(freq==1)
+                    {
+                        map.remove(S.charAt(i));
+                    }
+                    else
+                    {
+                        map.put(S.charAt(i),freq-1);
+                    }
+                    i++;
+                }
+                j++;
+            }
+            
+        }
+        return max;
+        
+    }
+}
